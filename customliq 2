@@ -19,12 +19,12 @@ If your theme already includes jQuery, you can skip this step.
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    const gifBg = document.querySelector('.gif-bg');
+    const gifBg = document.querySelector('.gradient');
     console.log('GifBg element:', gifBg);
     console.log('GifBg style:', gifBg.style);
     
     function setGifBg(backgroundImage) {
-      document.querySelector('.gif-bg.gradient').style.backgroundImage = `url('${backgroundImage}')`;
+      document.querySelector('.gradient').style.backgroundImage = `url('${backgroundImage}')`;
 
     }
 
