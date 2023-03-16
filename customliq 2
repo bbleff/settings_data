@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+
+
+<form id="settings-form" method="post">
+  <input type="hidden" name="universal_background_image" value="{{ settings.universal_background_image | default: 'ALLBG.gif' }}" />
+  <select id="dropdown" name="dropdown">
+    <option value="ALLBG.gif" {% if settings.universal_background_image == "ALLBG.gif" %}selected{% endif %}>ALL</option>
+    <option value="fadedBG.gif" {% if settings.universal_background_image == "fadedBG.gif" %}selected{% endif %}>faded</option>
+    <option value="winterBG.gif" {% if settings.universal_background_image == "winterBG.gif" %}selected{% endif %}>winter</option>
+  </select>
+</form>
+
+{% comment %}
+Include the following script tag to load the jQuery library.
+If your theme already includes jQuery, you can skip this step.
+{% endcomment %}
+{{ 'jquery-3.6.4.min.js' | asset_url | script_tag }}
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const gifBg = document.querySelector('.gif-bg');
+    console.log('GifBg element:', gifBg);
+    console.log('GifBg style:', gifBg.style);
+    
+    function setGifBg(backgroundImage) {
+      document.querySelector('.gif-bg.gradient').style.backgroundImage = `url('${backgroundImage}')`;
+
+    }
+
+    console.log('Current section background image:', '{{ section.settings.background | img_url: 'master' }}');
+    setGifBg('{{ section.settings.background | asset_url }}');
+
+    const selectedOption = '{{ settings.universal_background_image | default: 'ALLBG.gif' }}';
+    const backgroundImage = '{{ "ALLBG.gif" | asset_url }}';
+    console.log('Selected background image:', backgroundImage);
+
+    var formData = new FormData();
+    formData.append('universal_background_image', backgroundImage);
+    
+    fetch('/tools/settings_data/update', {
+      method: 'POST',
+      body: formData
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      console.log('Settings data updated successfully:', data);
+
+      location.reload(); // Reload the page after the settings have been updated
+    })
+    .catch(function(error) {
+      console.error('Error updating settings data:', error);
+    });
+
+    document.getElementById('dropdown').addEventListener('change', function() {
+      updateSettingsData();
+    });
+  });
+
+  function updateSettingsData() {
+    var selectedOption = document.getElementById('dropdown').value;
+    var backgroundImage = '';
+  
+    console.log('Current background image:', '{{ settings_data.current_background_image }}');
+    // Look up the corresponding background image URL based on the selected option
+    switch (selectedOption) {
+      case 'ALLBG.gif':
+        backgroundImage = '{{ "ALLBG.gif" | asset_url }}';
+        break;
+      case 'fadedBG.gif':
+        backgroundImage = '{{ "fadedBG.gif" | asset_url }}';
+        break;
+      case 'winterBG.gif':
+        backgroundImage = '{{ "winterBG.gif" | asset_url }}';
+        break;
+      default:
+        backgroundImage = '{{ "default.jpg" | asset_url }}';
+        break;
+    }
+    
+    console.log('Selected background image:', backgroundImage);
+
+    var formData = new FormData();
+    formData.append('universal_background_image', backgroundImage);
+    
+    fetch('/tools/settings_data/update', {
+      method: 'POST',
+      body: formData
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      console.log('Settings data updated successfully:', data);
+
+      location.reload(); // Reload the page after the settings have been updated
+    })
+    .catch(function(error) {
+      console.error('Error updating settings data:', error);
+    });
+  }
+</script>
