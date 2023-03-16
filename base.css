@@ -3110,11 +3110,12 @@ div.product-grid-container .card__information, div.product-grid-container .card-
 /* UNIVERSAL WEBSITE BACKGROUND CODE */
 
 .gif-bg {
-  background-image: url('ALLBG.gif'), url('fadedBG.gif'), url('winterBG.gif');
+  background-size: cover;
   position: relative;
   height: 100vh;
   width: 100vw;
 }
+
 
 
 
@@ -3127,7 +3128,7 @@ div.product-grid-container .card__information, div.product-grid-container .card-
   z-index: 1;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Change the color and opacity as desired */
+  
   pointer-events: none;
 }
 
