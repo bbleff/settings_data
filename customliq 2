@@ -17,9 +17,15 @@ If your theme already includes jQuery, you can skip this step.
 {{ 'jquery-3.6.4.min.js' | asset_url | script_tag }}
 
 
-
+<script>
 document.addEventListener("DOMContentLoaded", function() {
+    const dropdown = document.getElementById('dropdown');
     const gifBg = document.querySelector('.gradient');
+    const backgroundUrls = {
+      'ALLBG.gif': 'https://cdn.shopify.com/s/files/1/0724/4008/6836/files/ALLBG.jpg?v=1678938761',
+      'fadedBG.gif': 'https://cdn.shopify.com/s/files/1/0724/4008/6836/files/fadedBG.gif?v=1678862053',
+      'winterBG.gif': 'https://cdn.shopify.com/s/files/1/0724/4008/6836/files/winterBG.gif?v=1678921149',
+    };
     console.log('GifBg element:', gifBg);
     console.log('GifBg style:', gifBg.style);
     
