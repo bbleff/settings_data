@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+
+
 <form id="settings-form" method="post">
   <input type="hidden" name="universal_background_image" value="{{ settings.universal_background_image | default: 'ALLBG.gif' }}" />
   <select id="dropdown" name="dropdown">
@@ -13,10 +16,12 @@ If your theme already includes jQuery, you can skip this step.
 {% endcomment %}
 {{ 'jquery-3.6.4.min.js' | asset_url | script_tag }}
 
+
+
 <script>
   function updateSettingsData() {
     var selectedOption = document.getElementById('dropdown').value;
-    var backgroundImage;
+    var backgroundImage = '';
   
     console.log('Current background image:', '{{ settings_data.current_background_image }}');
     // Look up the corresponding background image URL based on the selected option
