@@ -23,7 +23,7 @@ If your theme already includes jQuery, you can skip this step.
     var selectedOption = document.getElementById('dropdown').value;
     var backgroundImage = '';
   
-    console.log('Current background image:', '{{ settings_data.current_background_image }}');
+    console.log('Current background image:', '{{ settings.universal_background_image | default: 'ALLBG.gif' }}');
     // Look up the corresponding background image URL based on the selected option
     switch (selectedOption) {
       case 'ALLBG.gif':
