@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
-
+document.addEventListener('DOMContentLoaded', function() {
+{{ 'base.css' | asset_url | stylesheet_tag }}
 
 <form id="settings-form" method="post">
   <input type="hidden" name="universal_background_image" value="{{ settings.universal_background_image | default: 'ALLBG.gif' }}" />
@@ -108,3 +108,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 </script>
+});
